@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Katalog tvůrců</h1><hr>
+    <a href="{% url 'creator_create' %}" class="btn btn-primary">Přidat</a>
+    <hr>
+    {% for creator in object_list %}
+        <li class="movie-item">
+            <a href="{% url 'creator' creator.id %}">{{ creator }}</a>
+            <div class="actions">
+                <a href="{% url 'creator_update' creator.id %}"> 📝️</a>
+                <a href="{% url 'creator_delete' creator.id %}"> 🗑️️</a>
+            </div>
+        </li>
+        <hr>
+    {% endfor %}
+{% endblock %}

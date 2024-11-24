@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for genre in genres %}
+        {% if genre.movies.count %}
+            <a href="{% url 'genre' genre.id %}">{{ genre }} ({{ genre.movies.count }})</a>{% if not forloop.last %}, {% endif %}
+        {% endif %}
+    {% endfor %}<br>
+    {% for country in countries %}
+        {% if country.movies.count %}
+            <a href="{% url 'country' country.id %}">{{ country }} ({{ country.movies.count }})</a>{% if not forloop.last %}, {% endif %}
+        {% endif %}
+    {% endfor %}<hr>
+<h1>Katalog filmů</h1><hr>
+    <a href="{% url 'movie_create' %}" class="btn btn-primary">Přidat</a>
+    <hr>
+    {% for movie in movies %}
+        <li class="movie-item">
+            <a href="{% url 'movie' movie.id %}">{{ movie }}</a>
+            <div class="actions">
+                <a href="{% url 'movie_update' movie.id %}"> 📝</a>
+                <a href="{% url 'movie_delete' movie.id %}">| 🗑️️</a>
+            </div>
+        </li>
+        <hr>
+    {% endfor %}
+{% endblock %}

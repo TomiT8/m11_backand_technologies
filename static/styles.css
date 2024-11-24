@@ -1,0 +1,16 @@
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.movie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.movie-item .actions {
+    display: flex;
+    gap: 8px;
+}

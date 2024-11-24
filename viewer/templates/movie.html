@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ movie.title_orig }}</h1>
+    <div class="movie-title-cz"><b>{{ movie.title_cz }}</b></div><hr>
+    <div class="movie-year"><b>Rok:</b> {{ movie.year }}</div>
+    <div class="movie-length"><b>Délka:</b> {{ movie.length_format }}</div>
+    <div class="movie-directors"><b>Režie:</b>
+        {% for director in movie.directors.all %}
+            <a href="{% url 'creator' director.id %}">{{ director.first_name }} {{ director.last_name }}</a>{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Tento film nemá žádného režiséra.
+        {% endfor %}
+    </div>
+    <div class="movie-actors"><b>Hrají:</b>
+        {% for actor in movie.actors.all %}
+            <a href="{% url 'creator' actor.id %}">{{ actor.full_name }}</a>{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Tento film nemá žádného herce.
+        {% endfor %}
+    </div>
+    <div class="movie-countries"><b>Země:</b>
+        {% for country in movie.countries.all %}
+            {{ country }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Tento film nemá žádnou zemi.
+        {% endfor %}
+    </div>
+    <div class="movie-genres"><b>Žánry:</b>
+        {% for genre in movie.genres.all %}
+            <a href="{% url 'genre' genre.id %}">{{ genre }}</a>{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Tento film nemá žádný žánr.
+        {% endfor %}
+    </div><hr>
+    <div class="movie-description">
+        {{ movie.description }}
+    </div>
+ <br>
+    <hr>
+    <a href="{% url 'movie_update' movie.id %}" class="btn btn-primary">Aktualizovat</a>
+    <a href="{% url 'movie_delete' movie.id %}" class="btn btn-danger">Smazat</a>
+{% endblock %}

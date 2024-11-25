@@ -4,7 +4,7 @@ from datetime import date
 from django.core.exceptions import ValidationError
 from django.forms import Form, CharField, DateField, ModelChoiceField, Textarea, ModelForm, NumberInput
 
-from viewer.models import Country, Creator, Movie
+from viewer.models import Country, Creator, Movie, Genre
 
 """
 class CreatorForm(Form):
@@ -157,3 +157,36 @@ class MovieForm(ModelForm):
             raise ValidationError("Originálny názov je povinný.")
 
         return cleaned_data
+
+
+class GenreForm(ModelForm):
+    class Meta:
+        model = Genre
+        fields = '__all__'
+        #fields = ['biography', 'first_name', 'last_name']
+        #exclude = ['nationality']
+        labels = {
+            'name': 'Název'
+        }
+        help_texts = {
+            'name': 'Zadejte název žánru.',
+        }
+        error_messages = {
+            'name': {
+                'required': 'Název je povinný.',
+                'max_length': 'Název je příliš dlouhý.',
+            },
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if name:
+            name = name.strip()
+            name = name.capitalize()
+        return name

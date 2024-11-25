@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, FormView, UpdateView, DeleteView
 
-from viewer.forms import CreatorForm, MovieForm
+from viewer.forms import CreatorForm, MovieForm, GenreForm
 from viewer.models import Movie, Creator, Genre, Country
 
 
@@ -135,12 +135,60 @@ class CreatorDeleteView(DeleteView):
     success_url = reverse_lazy('creators')
 
 
+class GenreListView(ListView):
+    template_name = "genres.html"
+    model = Genre
+
 def genre(request, pk):
     try:
         return render(request, "genre.html", {'genre': Genre.objects.get(id=pk)})
     except:
         return home(request)
 
+class GenreFormView(FormView):
+    template_name = "form.html"
+    form_class = GenreForm
+    success_url = reverse_lazy('genres')
+
+    def form_valid(self, form):
+        print("Form is valid")
+        result = super().form_valid(form)
+        cleaned_data = form.cleaned_data
+        Genre.objects.create(
+            name=cleaned_data["name"]
+        )
+        return result
+
+    def form_invalid(self, form):
+        print("Form is invalid")
+        return super().form_invalid(form)
+
+
+class GenreCreateView(CreateView):
+    template_name = 'form.html'
+    form_class = GenreForm
+    success_url = reverse_lazy('genres')
+
+    def form_invalid(self, form):
+        print("Form is invalid")
+        return super().form_invalid(form)
+
+
+class GenreUpdateView(UpdateView):
+    template_name = 'form.html'
+    form_class = GenreForm
+    success_url = reverse_lazy('genres')
+    model = Genre
+
+    def form_invalid(self, form):
+        print("Form is invalid")
+        return super().form_invalid(form)
+
+
+class GenreDeleteView(DeleteView):
+    template_name = "confirm_delete.html"
+    model = Genre
+    success_url = reverse_lazy('genres')
 
 def country(request, pk):
     try:

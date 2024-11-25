@@ -35,7 +35,7 @@ from django.urls import path
 
 from viewer.views import home, movie, creator, genre, MoviesTemplateView, MoviesListView, \
     CreatorsListView, CreatorCreateView, CreatorUpdateView, CreatorDeleteView, country, \
-    MovieUpdateView, MovieDeleteView, MovieCreateView
+    MovieUpdateView, MovieDeleteView, MovieCreateView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -58,5 +58,9 @@ urlpatterns = [
     path('creator/delete/<pk>/', CreatorDeleteView.as_view(), name='creator_delete'),
     path('creator/<pk>/', creator, name='creator'),
 
+    path('genres/', GenreListView.as_view(), name='genres'),
+    path('genre/create/', GenreCreateView.as_view(), name='genre_create'),
+    path('genre/update/<pk>/', GenreUpdateView.as_view(), name='genre_update'),
+    path('genre/delete/<pk>/', GenreDeleteView.as_view(), name='genre_delete'),
     path('genre/<pk>/', genre, name='genre'),
 ]

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Katalog žanru</h1><hr>
+    <a href="{% url 'genre_create' %}" class="btn btn-primary">Přidat</a>
+    <hr>
+    {% for genre in object_list %}
+        <li class="movie-item">
+            <a href="{% url 'genre' genre.id %}">{{ genre }}</a>
+            <div class="actions">
+                <a href="{% url 'genre_update' genre.id %}"> 📝️</a>
+                <a href="{% url 'genre_delete' genre.id %}"> 🗑️️</a>
+            </div>
+        </li>
+        <hr>
+    {% endfor %}
+{% endblock %}

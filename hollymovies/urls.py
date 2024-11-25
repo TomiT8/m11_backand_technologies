@@ -41,7 +41,6 @@ from viewer.views import home, movie, creator, genre, MoviesTemplateView, Movies
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('country/<pk>/', country, name='country'),
 
     path('', home, name='home'),
 

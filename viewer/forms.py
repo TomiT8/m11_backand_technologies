@@ -198,7 +198,7 @@ class CountryForm(ModelForm):
             'name': 'Název'
         }
         help_texts = {
-            'name': 'Zadejte název žánru.',
+            'name': 'Zadejte název země.',
         }
         error_messages = {
             'name': {

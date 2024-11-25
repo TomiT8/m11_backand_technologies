@@ -14,6 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.contrib.auth.views import LogoutView
+
+from accounts.views import SubmittableLoginView, SignUpView, user_logout
+
 """
 URL configuration for hollymovies project.
 
@@ -37,6 +41,9 @@ from viewer.views import home, movie, creator, genre, MoviesTemplateView, Movies
     CreatorsListView, CreatorCreateView, CreatorUpdateView, CreatorDeleteView, country, \
     MovieUpdateView, MovieDeleteView, MovieCreateView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, CountryListView, CountryCreateView, \
     CountryDeleteView, CountryUpdateView
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -69,4 +76,8 @@ urlpatterns = [
     path('country/update/<pk>/', CountryUpdateView.as_view(), name='country_update'),
     path('country/delete/<pk>/', CountryDeleteView.as_view(), name='country_delete'),
     path('country/<pk>/', country, name='country'),
+
+    path('accounts/login/', SubmittableLoginView.as_view(), name='login'),
+    path('accounts/signup/', SignUpView.as_view(), name='signup'),
+    path('accounts/logout/', user_logout, name='logout'),
 ]

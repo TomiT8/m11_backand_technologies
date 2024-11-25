@@ -12,14 +12,18 @@
         {% endif %}
     {% endfor %}<hr>
 <h1>Katalog filmů</h1><hr>
-    <a href="{% url 'movie_create' %}" class="btn btn-primary">Přidat</a>
-    <hr>
+    {% if user.is_authenticated %}
+        <a href="{% url 'movie_create' %}" class="btn btn-primary">Přidat</a>
+        <hr>
+    {% endif %}
     {% for movie in movies %}
         <li class="movie-item">
             <a href="{% url 'movie' movie.id %}">{{ movie }}</a>
             <div class="actions">
-                <a href="{% url 'movie_update' movie.id %}"> 📝</a>
-                <a href="{% url 'movie_delete' movie.id %}"> 🗑️️</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'movie_update' movie.id %}"> 📝</a>
+                    <a href="{% url 'movie_delete' movie.id %}"> 🗑️️</a>
+                {% endif %}
             </div>
         </li>
         <hr>

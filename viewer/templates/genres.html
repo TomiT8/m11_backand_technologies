@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Katalog žanru</h1><hr>
+<h1>Katalog žánrů</h1><hr>
     <a href="{% url 'genre_create' %}" class="btn btn-primary">Přidat</a>
     <hr>
     {% for genre in object_list %}

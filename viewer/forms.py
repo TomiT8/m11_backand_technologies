@@ -110,22 +110,22 @@ class MovieForm(ModelForm):
         model = Movie
         fields = ['title_orig', 'title_cz', 'year', 'length', 'directors', 'actors', 'countries', 'genres', 'description']
         labels = {
-            'title_orig': 'Originálny názov',
-            'title_cz': 'Český názov',
+            'title_orig': 'Originálni název',
+            'title_cz': 'Český název',
             'year': 'Rok',
-            'length': 'Dĺžka (min)',
+            'length': 'Délka (min)',
             'directors': 'Réžie',
-            'actors': 'Herecké obsadenie',
-            'countries': 'Krajiny',
-            'genres': 'Žánre',
+            'actors': 'Herecké obsazení',
+            'countries': 'Země',
+            'genres': 'Žánry',
             'description': 'Popis',
         }
         help_texts = {
-            'title_orig': 'Zadajte originálny názov filmu.',
-            'title_cz': 'Zadajte český názov filmu (ak existuje).',
-            'year': 'Zadajte rok vydania filmu.',
-            'length': 'Dĺžka filmu v minútach.',
-            'description': 'Popis filmu, stručný obsah alebo iné detaily.',
+            'title_orig': 'Zadejte originálni název filmu.',
+            'title_cz': 'Zadajte český název filmu (pokud existuje).',
+            'year': 'Zadejte rok vydání filmu.',
+            'length': 'Délka filmu v minútach.',
+            'description': 'Popis filmu, stručný obsah anebo jiné detaily.',
         }
         error_messages = {
             'title_orig': {
@@ -141,13 +141,13 @@ class MovieForm(ModelForm):
     def clean_year(self):
         year = self.cleaned_data['year']
         if year and year > date.today().year:
-            raise ValidationError("Rok filmu nemôže byť v budúcnosti.")
+            raise ValidationError("Rok filmu nemůže býť v budoucnosti.")
         return year
 
     def clean_length(self):
         length = self.cleaned_data['length']
         if length and length <= 0:
-            raise ValidationError("Dĺžka filmu musí byť väčšia než 0.")
+            raise ValidationError("Délka filmu musí být větší než 0.")
         return length
 
     def clean(self):
@@ -155,7 +155,7 @@ class MovieForm(ModelForm):
 
         title_orig = cleaned_data.get('title_orig')
         if not title_orig:
-            raise ValidationError("Originálny názov je povinný.")
+            raise ValidationError("Originálni název je povinný.")
 
         return cleaned_data
 
@@ -164,8 +164,6 @@ class GenreForm(ModelForm):
     class Meta:
         model = Genre
         fields = '__all__'
-        #fields = ['biography', 'first_name', 'last_name']
-        #exclude = ['nationality']
         labels = {
             'name': 'Název'
         }

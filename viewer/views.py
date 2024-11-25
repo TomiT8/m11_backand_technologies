@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, FormView, UpdateView, DeleteView
 
-from viewer.forms import CreatorForm, MovieForm, GenreForm
+from viewer.forms import CreatorForm, MovieForm, GenreForm, CountryForm
 from viewer.models import Movie, Creator, Genre, Country
 
 
@@ -190,8 +190,58 @@ class GenreDeleteView(DeleteView):
     model = Genre
     success_url = reverse_lazy('genres')
 
+
+class CountryListView(ListView):
+    template_name = "countries.html"
+    model = Country
+
 def country(request, pk):
     try:
         return render(request, "country.html", {'country': Country.objects.get(id=pk)})
     except:
         return home(request)
+
+class CountryFormView(FormView):
+    template_name = "form.html"
+    form_class = CountryForm
+    success_url = reverse_lazy('countries')
+
+    def form_valid(self, form):
+        print("Form is valid")
+        result = super().form_valid(form)
+        cleaned_data = form.cleaned_data
+        Country.objects.create(
+            name=cleaned_data["name"]
+        )
+        return result
+
+    def form_invalid(self, form):
+        print("Form is invalid")
+        return super().form_invalid(form)
+
+
+class CountryCreateView(CreateView):
+    template_name = 'form.html'
+    form_class = CountryForm
+    success_url = reverse_lazy('countries')
+
+    def form_invalid(self, form):
+        print("Form is invalid")
+        return super().form_invalid(form)
+
+
+class CountryUpdateView(UpdateView):
+    template_name = 'form.html'
+    form_class = CountryForm
+    success_url = reverse_lazy('countries')
+    model = Country
+
+    def form_invalid(self, form):
+        print("Form is invalid")
+        return super().form_invalid(form)
+
+
+class CountryDeleteView(DeleteView):
+    template_name = "confirm_delete.html"
+    model = Country
+    success_url = reverse_lazy('countries')

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Katalog zemí</h1><hr>
+    <a href="{% url 'country_create' %}" class="btn btn-primary">Přidat</a>
+    <hr>
+    {% for country in object_list %}
+        <li class="movie-item">
+            <a href="{% url 'country' country.id %}">{{ country }}</a>
+            <div class="actions">
+                <a href="{% url 'country_update' country.id %}"> 📝️</a>
+                <a href="{% url 'country_delete' country.id %}"> 🗑️️</a>
+            </div>
+        </li>
+        <hr>
+    {% endfor %}
+{% endblock %}

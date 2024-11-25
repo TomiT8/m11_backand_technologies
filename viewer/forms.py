@@ -40,6 +40,7 @@ class CreatorForm(ModelForm):
     #last_name = CharField(max_length=32, required=False, label='Příjmení')
     date_of_birth = DateField(required=False, widget=NumberInput(attrs={'type': 'date'}), label='Datum narození')
     date_of_death = DateField(required=False, widget=NumberInput(attrs={'type': 'date'}), label='Datum úmrtí')
+
     #nationality = ModelChoiceField(queryset=Country.objects, required=False, label='Národnost')
     #biography = CharField(widget=Textarea, required=False, label="Biografie")
 
@@ -183,6 +184,35 @@ class GenreForm(ModelForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if name:
+            name = name.strip()
+            name = name.capitalize()
+        return name
+
+
+class CountryForm(ModelForm):
+    class Meta:
+        model = Country
+        fields = '__all__'
+        labels = {
+            'name': 'Název'
+        }
+        help_texts = {
+            'name': 'Zadejte název žánru.',
+        }
+        error_messages = {
+            'name': {
+                'required': 'Název je povinný.',
+                'max_length': 'Název je příliš dlouhý.',
+            },
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
     def clean_name(self):
         name = self.cleaned_data['name']

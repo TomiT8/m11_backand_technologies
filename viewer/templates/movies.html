@@ -11,8 +11,8 @@
             <a href="{% url 'country' country.id %}">{{ country }} ({{ country.movies.count }})</a>{% if not forloop.last %}, {% endif %}
         {% endif %}
     {% endfor %}<hr>
-<h1>Katalog filmů</h1><hr>
-    {% if user.is_authenticated %}
+<h1>Katalog filmů</h1>
+    {% if perms.viewer.add_movie %}
         <a href="{% url 'movie_create' %}" class="btn btn-primary">Přidat</a>
         <hr>
     {% endif %}
@@ -20,8 +20,10 @@
         <li class="movie-item">
             <a href="{% url 'movie' movie.id %}">{{ movie }}</a>
             <div class="actions">
-                {% if user.is_authenticated %}
+                {% if perms.viewer.change_movie %}
                     <a href="{% url 'movie_update' movie.id %}"> 📝</a>
+                {% endif %}
+                {% if perms.viewer.delete_movie %}
                     <a href="{% url 'movie_delete' movie.id %}"> 🗑️️</a>
                 {% endif %}
             </div>

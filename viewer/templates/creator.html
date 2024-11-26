@@ -27,10 +27,12 @@
     {% endif %}
     <br>
     {{ creator.biography }}
-
-    <br>
-    <hr>
-
-    <a href="{% url 'creator_update' creator.id %}" class="btn btn-primary">Aktualizovat</a>
+    {% if perms.viewer.change_create %}
+        <br>
+        <hr>
+        <a href="{% url 'creator_update' creator.id %}" class="btn btn-primary">Aktualizovat</a>
+    {% endif %}
+    {% if perms.viewer.delete_create %}
     <a href="{% url 'creator_delete' creator.id %}" class="btn btn-danger">Smazat</a>
+    {% endif %}
 {% endblock %}

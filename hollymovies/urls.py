@@ -35,7 +35,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from viewer.views import home, movie, creator, genre, MoviesTemplateView, MoviesListView, \
     CreatorsListView, CreatorCreateView, CreatorUpdateView, CreatorDeleteView, country, \
@@ -80,4 +80,5 @@ urlpatterns = [
     path('accounts/login/', SubmittableLoginView.as_view(), name='login'),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
     path('accounts/logout/', user_logout, name='logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

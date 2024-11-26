@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import PasswordInput
+from django import forms
 
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -12,7 +12,12 @@ class SignUpForm(UserCreationForm):
             'password1': 'Heslo',
             'password2': 'Heslo znovu'
         }
-        widgets = {
-            'password1': PasswordInput(attrs={'placeholder': 'Heslo'}),
-            'password2': PasswordInput(attrs={'placeholder': 'Heslo znovu'}),
-        }
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Heslo'}),
+        label="Heslo"
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Heslo znovu'}),
+        label="Heslo znovu"
+    )

@@ -37,13 +37,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from viewer.views import home, movie, creator, genre, MoviesTemplateView, MoviesListView, \
+from viewer.views import home, movie, creator, genre, MoviesListView, \
     CreatorsListView, CreatorCreateView, CreatorUpdateView, CreatorDeleteView, country, \
     MovieUpdateView, MovieDeleteView, MovieCreateView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, CountryListView, CountryCreateView, \
-    CountryDeleteView, CountryUpdateView
-
-
-
+    CountryDeleteView, CountryUpdateView, MovieTemplateView, MoviesTemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -53,11 +50,10 @@ urlpatterns = [
 
 
     path('movies/', MoviesTemplateView.as_view(), name='movies'),
-    path('movies/', MoviesListView.as_view(), name='movies'),
-    path('movies/create/', MovieCreateView.as_view(), name='movie_create'),
+    path('movie/create/', MovieCreateView.as_view(), name='movie_create'),
     path('movie/update/<pk>/', MovieUpdateView.as_view(), name='movie_update'),
     path('movie/delete/<pk>/', MovieDeleteView.as_view(), name='movie_delete'),
-    path('movie/<pk>/', movie, name='movie'),
+    path('movie/<pk>/', MovieTemplateView.as_view(), name='movie'),
 
     path('creators/', CreatorsListView.as_view(), name='creators'),
     path('creator/create/', CreatorCreateView.as_view(), name='creator_create'),

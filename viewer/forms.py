@@ -4,7 +4,7 @@ from datetime import date
 from django.core.exceptions import ValidationError
 from django.forms import Form, CharField, DateField, ModelChoiceField, Textarea, ModelForm, NumberInput
 
-from viewer.models import Country, Creator, Movie, Genre
+from viewer.models import Country, Creator, Movie, Genre, Review
 
 """
 class CreatorForm(Form):
@@ -218,3 +218,15 @@ class CountryForm(ModelForm):
             name = name.strip()
             name = name.capitalize()
         return name
+
+
+class ReviewModelForm(ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        lables = {
+            'rating': 'Hodnocení',
+            'comment': 'Komentář'
+        }
+

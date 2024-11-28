@@ -14,9 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 
 from accounts.views import SubmittableLoginView, SignUpView, user_logout
+from hollymovies import settings
 
 """
 URL configuration for hollymovies project.
@@ -40,14 +42,12 @@ from django.urls import path, include
 from viewer.views import home, movie, creator, genre, MoviesListView, \
     CreatorsListView, CreatorCreateView, CreatorUpdateView, CreatorDeleteView, country, \
     MovieUpdateView, MovieDeleteView, MovieCreateView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, CountryListView, CountryCreateView, \
-    CountryDeleteView, CountryUpdateView, MovieTemplateView, MoviesTemplateView
+    CountryDeleteView, CountryUpdateView, MovieTemplateView, MoviesTemplateView, ImageDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-
     path('', home, name='home'),
-
 
     path('movies/', MoviesTemplateView.as_view(), name='movies'),
     path('movie/create/', MovieCreateView.as_view(), name='movie_create'),
@@ -77,4 +77,7 @@ urlpatterns = [
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
     path('accounts/logout/', user_logout, name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
-]
+
+    path('image/<pk>/', ImageDetailView.as_view(), name='image'),
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

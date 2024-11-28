@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, ListView, CreateView, FormView, U
 
 from accounts.models import Profile
 from viewer.forms import CreatorForm, MovieForm, GenreForm, CountryForm, ReviewModelForm
-from viewer.models import Movie, Creator, Genre, Country, Review
+from viewer.models import Movie, Creator, Genre, Country, Review, Image
 
 
 def home(request):
@@ -305,3 +305,8 @@ class CountryDeleteView(PermissionRequiredMixin, DeleteView):
     model = Country
     success_url = reverse_lazy('countries')
     permission_required = 'viewer.delete_country'
+
+
+class ImageDetailView(DeleteView):
+    model = Image
+    template_name = 'image.html'

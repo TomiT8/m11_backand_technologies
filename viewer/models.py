@@ -98,10 +98,11 @@ class Movie(Model):
             return f"{hours}:{minutes}"
         return "neznáma"
 
+
 class Review(Model):
     movie = ForeignKey(Movie, on_delete=CASCADE, null=False, blank=False, related_name='reviews')
     reviewer = ForeignKey(Profile, on_delete=SET_NULL, null=True, blank=False, related_name='reviews')
-    rating = IntegerField(null=True, blank=True) # 1-10
+    rating = IntegerField(null=True, blank=True)  # 1-10
     comment = TextField(null=True, blank=True)
     created = DateTimeField(auto_now_add=True)
     updated = DateTimeField(auto_now=True)
@@ -114,25 +115,20 @@ class Review(Model):
                 f"rating={self.rating}, comment={self.comment}")
 
     def __str__(self):
-        return ( f"Reviewer: {self.reviewer}, movie: {self.movie}, rating={self.rating}, comment={self.comment}")
+        return (f"Reviewer: {self.reviewer}, movie: {self.movie}, rating={self.rating}, comment={self.comment}")
 
 
 class Image(Model):
     image = ImageField(upload_to='images/', default=None, null=False, blank=False)
     movie = ForeignKey(Movie, on_delete=SET_NULL, null=True, blank=True, related_name='images')
-    actors = ManyToManyField(Creator, blank=True, related_name='images'),
+    actors = ManyToManyField(Creator, blank=True, related_name='images')
     description = TextField(null=True, blank=True)
 
     def __repr__(self):
         return (f"Image(image={self.image}, "
                 f"movie={self.movie}, "
                 f"actors={self.actors}, "
-                f"description={self.description}"
-                )
+                f"description={self.description})")
 
     def __str__(self):
-        return (f"Image: {self.image.name}, "
-                f"Movie: {self.movie}, "
-                f"Actors: {self.actors}, "
-                f"Description: {self.description}"
-                )
+        return f"Image: {self.image}, {self.description}"

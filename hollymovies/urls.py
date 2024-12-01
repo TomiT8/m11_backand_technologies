@@ -42,7 +42,7 @@ from django.urls import path, include
 from viewer.views import home, movie, creator, genre, MoviesListView, \
     CreatorsListView, CreatorCreateView, CreatorUpdateView, CreatorDeleteView, country, \
     MovieUpdateView, MovieDeleteView, MovieCreateView, GenreListView, GenreCreateView, GenreUpdateView, GenreDeleteView, CountryListView, CountryCreateView, \
-    CountryDeleteView, CountryUpdateView, MovieTemplateView, MoviesTemplateView, ImageDetailView
+    CountryDeleteView, CountryUpdateView, MovieTemplateView, MoviesTemplateView, ImageDetailView, ImageCreateView, ImageUpdateView, ImageDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -78,6 +78,10 @@ urlpatterns = [
     path('accounts/logout/', user_logout, name='logout'),
     path('accounts/', include('django.contrib.auth.urls')),
 
+    path('image/create/', ImageCreateView.as_view(), name='image_create'),
+    path('image/update/<pk>/', ImageUpdateView.as_view(), name='image_update'),
+    path('image/delete/<pk>/', ImageDeleteView.as_view(), name='image_delete'),
     path('image/<pk>/', ImageDetailView.as_view(), name='image'),
-    
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

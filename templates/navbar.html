@@ -15,28 +15,29 @@
                 <a class="nav-item btn btn-outline-light mx-1" href="{% url 'genres' %}">Žánry</a>
                 <a class="nav-item btn btn-outline-light mx-1" href="{% url 'countries' %}">Země</a>
 
-                {% if user.is_authenticated %}
-                    {% if perms.viewer.add_create or perms.viewer.add_movie or perms.viewer.add_country or perms.viewer.add_genre %}
-                        <div class="navbar-nav">
-                            <div class="nav-item dropdown">
-                                <a class="nav-item btn btn-light mx-1 active dropdown-toggle" href="#" data-toggle="dropdown">Přidat</a>
-                                <div class="dropdown-menu">
-                                    {% if perms.viewer.add_create %}
-                                        <a class="dropdown-item" href="{% url 'creator_create' %}">tvůrce</a>
-                                    {% endif %}
-                                    {% if perms.viewer.add_movie %}
-                                        <a class="dropdown-item" href="{% url 'movie_create' %}">film</a>
-                                    {% endif %}
-                                    {% if perms.viewer.add_country %}
-                                        <a class="dropdown-item" href="{% url 'country_create' %}">země</a>
-                                    {% endif %}
-                                    {% if perms.viewer.add_genre %}
-                                        <a class="dropdown-item" href="{% url 'genre_create' %}">žánr</a>
-                                    {% endif %}
-                                </div>
+                {% if perms.viewer.add_create or perms.viewer.add_movie or perms.viewer.add_country or perms.viewer.add_genre %}
+                    <div class="navbar-nav">
+                        <div class="nav-item dropdown">
+                            <a class="nav-item btn btn-light mx-1 active dropdown-toggle" href="#" data-toggle="dropdown">Přidat</a>
+                            <div class="dropdown-menu">
+                                {% if perms.viewer.add_create %}
+                                    <a class="dropdown-item" href="{% url 'creator_create' %}">tvůrce</a>
+                                {% endif %}
+                                {% if perms.viewer.add_movie %}
+                                    <a class="dropdown-item" href="{% url 'movie_create' %}">film</a>
+                                {% endif %}
+                                {% if perms.viewer.add_country %}
+                                    <a class="dropdown-item" href="{% url 'country_create' %}">země</a>
+                                {% endif %}
+                                {% if perms.viewer.add_genre %}
+                                    <a class="dropdown-item" href="{% url 'genre_create' %}">žánr</a>
+                                {% endif %}
+                                {% if perms.viewer.add_image %}
+                                    <a class="dropdown-item" href="{% url 'image_create' %}">obrázek</a>
+                                {% endif %}
                             </div>
                         </div>
-                    {% endif %}
+                    </div>
                 {% endif %}
             </div>
 

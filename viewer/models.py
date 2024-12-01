@@ -96,7 +96,7 @@ class Movie(Model):
             if minutes < 10:
                 minutes = f"0{minutes}"
             return f"{hours}:{minutes}"
-        return "neznáma"
+        return "neznámá"
 
 
 class Review(Model):

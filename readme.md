@@ -59,11 +59,11 @@ python manage.py startapp viewer
   - [x] vkládání
   - [x] editace
   - [x] mazání
-- [ ] film  # TODO
-  - [ ] vkládání  # TODO
-  - [ ] editace  # TODO
-  - [ ] mazání  # TODO
-- [ ] hodnocení filmu
+- [x] film   
+  - [x] vkládání  
+  - [x] editace  
+  - [x] mazání  
+- [x] hodnocení filmu
 - [ ] filtrování filmů na základě: 
   - [x] žánru, (viewer/genre-detail)
   - [ ] roku, 
@@ -91,8 +91,8 @@ python manage.py startapp viewer
   - [x] nationality -> country
   - [x] biography
   - [ ] awards (n:m -> award)
-  - [ ] movies_actor (n:m -> movie)
-  - [ ] movies_director (n:m -> movie)
+  - [x] movies_actor (n:m -> movie)
+  - [x] movies_director (n:m -> movie)
 - [ ] movie
   - [x] id
   - [x] title_orig
@@ -110,13 +110,13 @@ python manage.py startapp viewer
   - [ ] awards (n:m -> award)
   - [x] description
   - [ ] reviews -> review
-- [ ] review
-  - [ ] id
-  - [ ] movie_id -> movie
-  - [ ] reviewer -> user 
-  - [ ] rating
-  - [ ] comment 
-  - [ ] time  
+- [x] review
+  - [x] id
+  - [x] movie_id -> movie
+  - [x] reviewer -> user 
+  - [x] rating
+  - [x] comment 
+  - [x] time  
 - [ ] award
   - [ ] id
   - [ ] name (-> award_name)
@@ -131,11 +131,11 @@ python manage.py startapp viewer
   - [ ] id  
   - [ ] title
   - [ ] author -> creator
-- [ ] user
-  - [ ] id
-  - [ ] username
-  - [ ] first_name
-  - [ ] last_name
+- [x] user
+  - [x] id
+  - [x] username
+  - [x] first_name
+  - [x] last_name
 - [ ] media
   - [ ] id
   - [ ] type (image/video/text/sound)
@@ -143,6 +143,12 @@ python manage.py startapp viewer
   - [ ] movie_id -> movie
   - [ ] actors (n:m -> creators)
   - [ ] description
+- [x] image
+  - [x] id
+  - [x] image
+  - [x] movie_id -> movie
+  - [x] actors (n:m -> creators)
+  - [x] description
 
 ### Migrace
 Při každé změně v modelech musíme provést migraci databáze:
@@ -259,6 +265,47 @@ scifi.save()
 
 > [!WARNING] 
 > Data se do databáze nahrají i se svým id, tedy dojde k přepisu již existujících záznamů.
+
+## Testy
+V každé aplikaci máme soubor `tests.py`, do kterého můžeme vkládat testy. 
+Můžeme vytvořit další testovací soubory, je ale vhodné, aby název začínal `test*.py`.
+
+Testování spustíme příkazem `python manage.py test` - tento příkaz spustí všechny testy 
+ve všech souborech začínajích `test`.
+
+Příkaz `python manage.py test viewer.test_models` spustí testování definované v souboru `test_models` v 
+aplikaci `viewer`.
+
+Základní testy se spouštějí na virtuální databázi, která obsahuje stejné tabulky jako projektová databáze,
+ale je prázdná.
+
+### GUI
+Pro testování GUI si nainstalujeme selenium (pro práci s webovou stránkou): 
+`pip install selenium`.
+
+Během testování musí být spuštěn server.
+
+> [!WARNING] 
+> Zde již pracujeme s reálnou aplikací a tedy i s reálnými daty v databázi.
+
+## Image
+Nainstalujeme Pillow knihovnu `pip install Pillow`
+
+V modelech můžeme využít `ImageField`: `image = ImageField(upload_to='images/', defaulf=None, null=False, blank=False')` 
+
+Provedeme migraci.
+
+V `settings.py` přidáme cesty:
+```python
+MEDIA_ROOT = BASE_DIR
+MEDIA_URL = 'images/'
+```
+
+Do `urls.py` přidáme za konec seznamu urlpatterns:
+`+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)`
+
+Aby fungovalo odesílání souboru přes formulář, musí obsahovat:
+`<form method="post" enctype="multipart/form-data">`
 
 # Finální projekt - rady
 

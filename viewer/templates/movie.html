@@ -8,11 +8,13 @@
         {% for image in movie.images.all %}
             <span class="movie.image">
                 <a href="{% url 'image' image.id %}">
-                <img src="{{ image.image.url }}" alt="{{ image.description }}" width="150px"></a>
+                    <img src="{{ image.image.url }}" alt="{{ image.description }}" width="150px">
+                </a>
+                <hr>
             </span>
         {% endfor %}
     </div>
-    <hr>
+
     <div class="movie-year"><b>Rok:</b> {{ movie.year }}</div>
     <div class="movie-length"><b>Délka:</b> {{ movie.length_format }}</div>
     <div class="movie-directors"><b>Režie:</b>

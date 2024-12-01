@@ -9,10 +9,11 @@
                 <a href="{% url 'image' image.id %}">
                     <img src="{{ image.image.url }}" alt="{{ image.description }}" width="150px">
                 </a>
+                <hr>
             </span>
         {% endfor %}
     </div>
-    <hr>
+
     {% if creator.date_of_birth %}
         <div class="creator-date-of-birth"><b>Datum narození:</b> {{ creator.date_of_birth }}</div>
     {% endif %}

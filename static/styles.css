@@ -14,3 +14,44 @@ ul {
     display: flex;
     gap: 8px;
 }
+
+.nav-user {
+        color: black;
+        background-color: lightgrey;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        border: 1px solid #f8f9fa;
+        padding: 8px 12px;
+}
+
+.nav-user:hover {
+        color: white;
+        background-color: #800000;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-item-btn-up {
+    display: inline-block;
+    color: #f8f9fa;
+    background-color: transparent;
+    border: 1px solid #f8f9fa;
+    font-weight: bold;
+    padding: 8px 12px;
+    margin: 0 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+}
+
+.nav-item-btn-up:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+    border-color: #f8f9fa;
+}
+
+
+

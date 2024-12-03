@@ -9,16 +9,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item btn btn-outline-light mx-1" href="{% url 'home' %}">Home</a>
-                <a class="nav-item btn btn-outline-light mx-1" href="{% url 'movies' %}">Filmy</a>
-                <a class="nav-item btn btn-outline-light mx-1" href="{% url 'creators' %}">Tvůrci</a>
-                <a class="nav-item btn btn-outline-light mx-1" href="{% url 'genres' %}">Žánry</a>
-                <a class="nav-item btn btn-outline-light mx-1" href="{% url 'countries' %}">Země</a>
+                <a class="nav-item-btn-up" href="{% url 'home' %}">Home</a>
+                <a class="nav-item-btn-up" href="{% url 'movies' %}">Filmy</a>
+                <a class="nav-item-btn-up" href="{% url 'creators' %}">Tvůrci</a>
+                <a class="nav-item-btn-up" href="{% url 'genres' %}">Žánry</a>
+                <a class="nav-item-btn-up" href="{% url 'countries' %}">Země</a>
 
                 {% if perms.viewer.add_create or perms.viewer.add_movie or perms.viewer.add_country or perms.viewer.add_genre %}
                     <div class="navbar-nav">
                         <div class="nav-item dropdown">
-                            <a class="nav-item btn btn-light mx-1 active dropdown-toggle" href="#" data-toggle="dropdown">Přidat</a>
+                            <a class="nav-item btn btn-light mx-1 nav-user" href="#" data-toggle="dropdown">Přidat</a>
                             <div class="dropdown-menu">
                                 {% if perms.viewer.add_create %}
                                     <a class="dropdown-item" href="{% url 'creator_create' %}">tvůrce</a>
@@ -44,19 +44,19 @@
             <div class="navbar-nav ml-auto">
                 <div class="nav-item dropdown">
                     {% if user.is_authenticated %}
-                        <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown">
+                        <a class="nav-item btn btn-light mx-1 nav-user" href="#" data-toggle="dropdown">
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item text-right" href="{% url 'logout' %}">Odhlásit</a>
-                            <a class="dropdown-item text-right" href="{% url 'password_change' %}">Změna hesla</a>
-                            <a class="dropdown-item text-right" href="{% url 'password_reset' %}">Reset hesla</a>
+                            <a class="dropdown-item text-left" href="{% url 'logout' %}">👥 Odhlásit</a>
+                            <a class="dropdown-item text-left" href="{% url 'password_change' %}">Změna hesla</a>
                         </div>
                     {% else %}
-                        <a class="nav-item btn btn-light mx-1" href="#" data-toggle="dropdown">Nepřihlášený uživatel</a>
+                        <a class="nav-item btn btn-light mx-1 nav-user" href="#" data-toggle="dropdown">👥 Můj účet</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item text-right" href="{% url 'login' %}">Přihlásit</a>
-                            <a class="dropdown-item text-right" href="{% url 'signup' %}">Registrovat</a>
+                            <a class="dropdown-item text-left" href="{% url 'login' %}">Přihlásit</a>
+                            <a class="dropdown-item text-left" href="{% url 'signup' %}">Registrovat</a>
+                                                        <a class="dropdown-item text-left" href="{% url 'password_reset' %}">Zapomenuté heslo</a>
                         </div>
                     {% endif %}
                 </div>

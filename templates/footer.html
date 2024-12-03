@@ -1,12 +1,26 @@
 <footer class="text-center text-white bg-dark p-4">
-    <p><a class="text-reset fw-bold" href="https://sdacademy.cz/">SDAcademy</a> - PythonRemoteCZ24 - Backend technologies</p>
-    <div class="container text-center">
-        <p>&copy; {{ year }} HollyMovies. Všetky práva vyhradené.</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="#" class="text-white">Podmienky používania</a></li>
-            <li class="list-inline-item"><a href="#" class="text-white">Ochrana súkromia</a></li>
-            <li class="list-inline-item"><a href="#" class="text-white">Kontakt</a></li>
-        </ul>
-        <p>Vytvorené s pomocou <a href="https://github.com/petrgregor/PythonRemoteCZ24_m11_backend_technologies" class="text-white"> - Petr Gregor</a>.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-column text-left">
+                <h5 class="footer-title">Režim:</h5>
+                <button class="btn btn-outline-light" id="toggle-dark-mode">🌑</button>
+            </div>
+            <div class="col-md-4 footer-column">
+                <h5 class="footer-title text-left">Užitečné:</h5>
+                <ul class="footer-links text-left">
+                    <li><a href="{% url 'login' %}" class="text-white text-left">🔒 <u>Přihlásit</u></a></li>
+                    <li><a href="{% url 'signup' %}" class="text-white text-left">📝 <u>Registrovat</u></a></li>
+                    <li><a href="{% url 'password_reset' %}" class="text-white text-left">🔑 <u>Zapomenuté heslo</u></a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 footer-column text-right">
+                <h5 class="footer-title">HollyMovies</h5>
+                <span>Všechny práva vyhrazené.</span><br>
+                <span>
+                    <a href="https://sdacademy.cz/" target="_blank" class="text-white" style="text-decoration: none;"><u>SDAcademy</u></a>
+                </span><br>
+                <span>PythonRemoteCZ24 - Backend technologies</span>
+            </div>
+        </div>
     </div>
 </footer>

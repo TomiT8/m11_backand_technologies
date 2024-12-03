@@ -41,6 +41,31 @@
 
 {% include "footer.html" %}
 
+<script>
+    const toggleButton = document.getElementById('toggle-dark-mode');
+    const body = document.body;
+    const darkModeClass = 'dark-mode';
+
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        body.classList.add(darkModeClass);
+        toggleButton.textContent = '💡';
+    }
+
+    toggleButton.addEventListener('click', () => {
+        body.classList.toggle(darkModeClass);
+
+        if (body.classList.contains(darkModeClass)) {
+            localStorage.setItem('dark-mode', 'enabled');
+            toggleButton.textContent = '💡';
+        } else {
+            localStorage.setItem('dark-mode', null);
+            toggleButton.textContent = '🌑';
+        }
+    });
+</script>
+
 </body>
 
 </html>
+
+

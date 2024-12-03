@@ -66,7 +66,7 @@ class MovieTemplateView(TemplateView):
             context['movie'] = movie_[0]
             context['form_review'] = ReviewModelForm
             rating_avg = movie_[0].reviews.aggregate(Avg('rating'))['rating__avg']
-            context['rating_avg'] = rating_avg
+            context['rating_avg'] = movie_[0].rating
             return context
         return context
 
@@ -88,6 +88,8 @@ class MovieTemplateView(TemplateView):
             )
         movie_ = context['movie']
         rating_avg = movie_.reviews.aggregate(Avg('rating'))['rating__avg']
+        movie_.rating = rating_avg
+        movie_.save()
         #print(f"rating_avg: {rating_avg}")
         context['rating_avg'] = rating_avg
         return render(request, 'movie.html', context)

@@ -65,7 +65,7 @@
     <div>
         Průměrné hodnocení filmu:
         {% if rating_avg %}
-            {{ rating_avg }}
+            {{ rating_avg|floatformat:2 }}
         {% else %}
             dosud nehodnoceno
         {% endif %}

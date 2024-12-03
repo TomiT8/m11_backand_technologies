@@ -2,7 +2,8 @@ import re
 from datetime import date
 
 from django.core.exceptions import ValidationError
-from django.forms import Form, CharField, DateField, ModelChoiceField, Textarea, ModelForm, NumberInput
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.forms import Form, CharField, DateField, ModelChoiceField, Textarea, ModelForm, NumberInput, IntegerField
 
 from viewer.models import Country, Creator, Movie, Genre, Review, Image
 
@@ -222,6 +223,11 @@ class CountryForm(ModelForm):
 
 
 class ReviewModelForm(ModelForm):
+    rating = IntegerField(
+        required=True,
+        widget=NumberInput(attrs={'step': 1, 'min': 0, 'max': 10}),
+    )
+
     class Meta:
         model = Review
         fields = ['rating', 'comment']
@@ -229,6 +235,12 @@ class ReviewModelForm(ModelForm):
             'rating': 'Hodnocení',
             'comment': 'Komentář'
         }
+
+    def clean_rating(self):
+        rating = self.cleaned_data.get('rating')
+        if rating is not None and (rating < 0 or rating > 10):
+            raise ValidationError("Hodnocení musí být v rozmezí 0 až 10.")
+        return rating
 
 
 class ImageModelForm(ModelForm):

@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.db.models import Model, CharField, DateField, ForeignKey, SET_NULL, TextField, ManyToManyField, \
-    DateTimeField, IntegerField, CASCADE, ImageField, FloatField
+    DateTimeField, IntegerField, CASCADE, ImageField, FloatField, PositiveIntegerField
 
 from accounts.models import Profile
 
@@ -77,6 +77,7 @@ class Movie(Model):
     genres = ManyToManyField(Genre, blank=True, related_name='movies')
     description = TextField(blank=True)
     rating = FloatField(null=True, blank=True)
+    page_views = IntegerField(default=0)
     created = DateTimeField(auto_now_add=True)
     updated = DateTimeField(auto_now=True)
 

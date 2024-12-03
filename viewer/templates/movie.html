@@ -3,16 +3,16 @@
 {% block content %}
 <h1>{{ movie.title_orig }}</h1>
     <div class="movie-title-cz"><b>{{ movie.title_cz }}</b></div>
-    <hr>
     <div class="movie-images">
+        <hr>
         {% for image in movie.images.all %}
             <span class="movie.image">
                 <a href="{% url 'image' image.id %}">
                     <img src="{{ image.image.url }}" alt="{{ image.description }}" width="150px">
                 </a>
-                <hr>
             </span>
         {% endfor %}
+        <hr>
     </div>
 
     <div class="movie-year"><b>Rok:</b> {{ movie.year }}</div>
@@ -63,6 +63,7 @@
     <br>
     <hr>
     <div>
+        Počet zobrazení filmu: {{ movie.page_views }}, <br>
         Průměrné hodnocení filmu:
         {% if rating_avg %}
             {{ rating_avg|floatformat:2 }}

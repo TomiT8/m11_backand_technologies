@@ -48,7 +48,7 @@
 
     if (localStorage.getItem('dark-mode') === 'enabled') {
         body.classList.add(darkModeClass);
-        toggleButton.textContent = '💡';
+        toggleButton.textContent = '💡 Světlý vzhled';
     }
 
     toggleButton.addEventListener('click', () => {
@@ -56,10 +56,10 @@
 
         if (body.classList.contains(darkModeClass)) {
             localStorage.setItem('dark-mode', 'enabled');
-            toggleButton.textContent = '💡';
+            toggleButton.textContent = '💡 Světlý vzhled';
         } else {
             localStorage.setItem('dark-mode', null);
-            toggleButton.textContent = '🌑';
+            toggleButton.textContent = '🌑 Tmavý vzhled';
         }
     });
 </script>

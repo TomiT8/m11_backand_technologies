@@ -26,11 +26,30 @@ ul {
 
 .nav-user:hover {
         color: white;
-        background-color: #800000;
+        background-color: #cc2330;
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+}
+
+.nav-search {
+    display: inline-block;
+    color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    font-weight: bold;
+    padding: 8px 12px;
+    margin: 0 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+}
+
+.nav-search:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+    border-color: #f8f9fa;
 }
 
 .nav-item-btn-up {
@@ -58,3 +77,22 @@ ul {
 .dark-mode {
     background-color: #212529;
 }
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #cc2330;
+}
+
+.footer-title {
+    color: white;
+}
+
+.footer-text-ordinary{
+    color: white;
+}
+
+

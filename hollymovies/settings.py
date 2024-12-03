@@ -43,9 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_dump_load_utf8',
+    'rest_framework',
 
     'accounts',
-
+    'api',
     'viewer',
 ]
 
@@ -143,3 +144,10 @@ LOGOUT_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = BASE_DIR
 MEDIA_URL = 'images/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissions',
+    ]
+}
+

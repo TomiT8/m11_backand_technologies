@@ -18,7 +18,9 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 
 from accounts.views import SubmittableLoginView, SignUpView, user_logout
+from api.views import Movies, MovieDetail, Creators, CreatorDetail, CountryDetail, Countries, Genres, GenreDetail
 from hollymovies import settings
+from viewer.models import Movie
 
 """
 URL configuration for hollymovies project.
@@ -84,5 +86,14 @@ urlpatterns = [
     path('image/<pk>/', ImageDetailView.as_view(), name='image'),
 
     path('search/', search, name='search'),
+
+    path('api/movies/', Movies.as_view(), name='api.movies'),
+    path('api/movie/<pk>/', MovieDetail.as_view(), name='api.moviedetail'),
+    path('api/creators/', Creators.as_view(), name='api.creators'),
+    path('api/creator/<pk>/', CreatorDetail.as_view(), name='api.creatordetail'),
+    path('api/countries/', Countries.as_view(), name='api.countries'),
+    path('api/country/<pk>/', CountryDetail.as_view(), name='api.countrydetail'),
+    path('api/genres/', Genres.as_view(), name='api.genres'),
+    path('api/genre/<pk>/', GenreDetail.as_view(), name='api.genredetail'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

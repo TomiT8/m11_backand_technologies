@@ -42,6 +42,15 @@
             </div>
 
             <div class="navbar-nav ml-auto">
+                <div id="search-div">
+                    <form method="post" action="/search/">
+                        {% csrf_token %}
+                        <input type="text" id="search" name="search" placeholder="🔍Hledej...">
+                    </form>
+                </div>
+            </div>
+
+            <div class="navbar-nav ml-auto">
                 <div class="nav-item dropdown">
                     {% if user.is_authenticated %}
                         <a class="nav-item btn btn-light mx-1 nav-user" href="#" data-toggle="dropdown">

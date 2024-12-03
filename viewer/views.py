@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -346,3 +346,27 @@ class ImageDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('home')
     permission_required = 'viewer.delete_image'
     model = Image
+
+
+def search(request):
+    if request.method == 'POST':
+        search_string = request.POST.get('search').strip()
+        if len(search_string) > 0:
+            movie_title_orig = Movie.objects.filter(title_orig__contains=search_string)
+            movie_title_cz = Movie.objects.filter(title_cz__contains=search_string)
+            creator_creator = Creator.objects.filter(
+                Q(first_name__icontains=search_string) |
+                Q(last_name__icontains=search_string)
+                )
+
+            context = {
+                'search': search_string,
+                'movies_title_orig': movie_title_orig,
+                'movies_title_cz': movie_title_cz,
+                'creator_creator': creator_creator,
+            }
+            return render(request, 'search.html', context)
+        return render(request, 'home.html')
+
+    return render(request, 'search.html', {'error': 'Prosím, zadajte vyhľadávací výraz.'})
+
